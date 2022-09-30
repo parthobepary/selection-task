@@ -4,6 +4,7 @@
       <router-link to="/">Home</router-link>
       <router-link to="/slot">MySlot</router-link>
       <router-link to="/cards">Cards</router-link>
+      <router-link to="/crud">Crud</router-link>
       <router-link to="/login">Login</router-link>
     </nav>
   </div>

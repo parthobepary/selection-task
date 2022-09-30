@@ -4,6 +4,13 @@ import vuetify from "./plugins/vuetify";
 import router from "./router";
 import store from "./store";
 
+import { ValidationObserver } from "vee-validate";
+import { ValidationProvider } from 'vee-validate/dist/vee-validate.full.esm';
+Vue.component("ValidationObserver", ValidationObserver);
+Vue.component("ValidationProvider", ValidationProvider);
+
+//for vee-validater
+
 //for axois
 import axios from "axios";
 import VueAxios from "vue-axios";

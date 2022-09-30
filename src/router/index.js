@@ -1,5 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import CrudOperation from "../views/CrudOperation.vue";
 import HomeView from "../views/HomeView.vue";
 import HoverCards from "../views/HoverCards.vue";
 import LogIn from "../views/LogIn.vue";
@@ -27,6 +28,11 @@ const routes = [
     path: "/cards",
     name: "cards",
     component: HoverCards,
+  },
+  {
+    path: "/crud",
+    name: "crud",
+    component: CrudOperation,
   },
 ];
 
