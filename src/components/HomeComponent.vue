@@ -98,11 +98,15 @@
         </v-col>
       </v-row>
       <!-- ********** -->
+      <div>
+        {{ allUser }}
+      </div>
     </div>
   </v-container>
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
 import district from "../../public/Alljason/bd-districts.json";
 import division from "../../public/Alljason/bd-divisions.json";
 import post from "../../public/Alljason/bd-postcodes.json";
@@ -143,7 +147,16 @@ export default {
       this.nameByPost(this.upojilaName, 3);
     },
   },
+  computed: {
+    ...mapGetters(["allUser"]),
+  },
+  mounted() {
+    if (this.allUser && this.allUser.length < 1) {
+      this.GET_ALL_USER();
+    }
+  },
   methods: {
+    ...mapActions(["GET_ALL_USER"]),
     divisionWiseDistric(id, statsu) {
       if (statsu === 1) {
         this.newDistrict = this.district.districts.filter((d) => {
@@ -156,11 +169,6 @@ export default {
         });
       }
     },
-    /* districWiseUpozila(id) {
-      this.newUpozila = this.upozila.upazilas.filter((d) => {
-        return d.district_id == id;
-      });
-    }, */
     nameByPost(name) {
       this.newUpost = this.post.postcodes.filter((d) => {
         return d.upazila == name;

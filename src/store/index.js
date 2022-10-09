@@ -8,10 +8,14 @@ export default new Vuex.Store({
   state: () => ({
     categories: [],
     isLoading: false,
+    allUser: [],
   }),
   getters: {
     categories: (state) => {
       return state.categories;
+    },
+    allUser: (state) => {
+      return state.allUser;
     },
     isLoading: (state) => {
       return state.isLoading;
@@ -40,6 +44,9 @@ export default new Vuex.Store({
     DELETE(state, index) {
       state.categories.splice(index, 1);
     },
+    ALL_USER(state, user) {
+      state.allUser = user;
+    },
     LOADER_STATUS_CHANGE(state, value) {
       state.isLoading = value;
     },
@@ -59,6 +66,16 @@ export default new Vuex.Store({
           context.commit("LOADER_STATUS_CHANGE", false);
         });
     },
+    async GET_ALL_USER(context) {
+      await axios
+        .get("http://localhost:8000/api/user", {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        })
+        .then((res) => {
+          context.commit("ALL_USER", res.data);
+        });
+    },
   },
 });
-

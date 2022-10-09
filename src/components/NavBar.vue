@@ -5,10 +5,28 @@
       <router-link to="/slot">MySlot</router-link>
       <router-link to="/cards">Cards</router-link>
       <router-link to="/crud">Crud</router-link>
-      <router-link to="/login">Login</router-link>
+      <router-link v-if="!isToken" to="/login">Login</router-link>
+      <button
+        @click="logout()"
+        class="mr-5 pink py-1 rounded-lg px-3"
+        v-if="isToken"
+      >
+        Logout
+      </button>
+      <router-link v-if="!isToken" to="/ragistration">Signup</router-link>
     </nav>
   </div>
 </template>
+
+<script>
+export default {
+  name: "NavBar",
+  data() {
+    return {};
+  },
+  props: ["isToken", "logout"],
+};
+</script>
 
 <style lang="scss">
 #app {

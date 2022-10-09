@@ -1,5 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import PageNotFound from "../components/PageNotFound.vue";
 import CrudOperation from "../views/CrudOperation.vue";
 import HomeView from "../views/HomeView.vue";
 import HoverCards from "../views/HoverCards.vue";
@@ -13,6 +14,7 @@ const routes = [
     path: "/",
     name: "home",
     component: HomeView,
+    meta: { needsAuth: true },
   },
   {
     path: "/login",
@@ -33,6 +35,17 @@ const routes = [
     path: "/crud",
     name: "crud",
     component: CrudOperation,
+    meta: { needsAuth: true },
+  },
+  {
+    path: "/ragistration",
+    name: "ragistration",
+    component: CrudOperation,
+  },
+  {
+    path: "*",
+    name: "PageNotFound",
+    component: PageNotFound,
   },
 ];
 
@@ -40,6 +53,24 @@ const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  let token = localStorage.getItem("token");
+  if (to.matched.some((record) => record.meta.needsAuth)) {
+    if (token) {
+      next();
+      return;
+    }
+    next("/login");
+  } else {
+    if (token) {
+      if (to.path == "/login" || to.path == "/ragistration") {
+        router.go(-1);
+      }
+    }
+    next();
+  }
 });
 
 export default router;

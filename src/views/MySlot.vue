@@ -9,7 +9,11 @@
       ></SlotComponents>
     </div>
     <div>
-      <!-- trying to use slot -->
+      <SlotComponents>
+        <template v-slot:partho="{ tArray }">
+          {{ tArray }}
+        </template>
+      </SlotComponents>
     </div>
   </div>
 </template>

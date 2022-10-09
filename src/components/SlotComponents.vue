@@ -5,13 +5,13 @@
       {{ nameArray }}
       <v-btn @click="printHello('hello')">ok</v-btn>
     </div>
-    <!-- <div>
-      <ul>
-        <li v-for="title in titleArray" :key="title">
-          <slot :title="title"></slot>
-        </li>
-      </ul>
-    </div> -->
+
+    <div>
+      <router-link to="/crud">got to crud</router-link>
+    </div>
+    <div>
+      <slot name="partho" :tArray="titleArray"></slot>
+    </div>
   </div>
 </template>
 <script>
